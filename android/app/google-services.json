@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "443614047823",
+    "project_id": "si-travel",
+    "storage_bucket": "si-travel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443614047823:android:e00f69eb7ff46ed898c43a",
+        "android_client_info": {
+          "package_name": "com.example.si_travel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443614047823-igh9iu3b0qqia6p1fnqpa3lehhsgav8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXtS-hHKDpcYTwcz-KrvBBv_VUe-zI5E0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443614047823-igh9iu3b0qqia6p1fnqpa3lehhsgav8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443614047823:android:f1346c74506f114298c43a",
+        "android_client_info": {
+          "package_name": "com.example.sitravel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443614047823-igh9iu3b0qqia6p1fnqpa3lehhsgav8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXtS-hHKDpcYTwcz-KrvBBv_VUe-zI5E0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443614047823-igh9iu3b0qqia6p1fnqpa3lehhsgav8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
