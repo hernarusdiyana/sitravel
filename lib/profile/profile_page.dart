@@ -1,14 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sitravel_app/colors.dart';
 import 'package:sitravel_app/main.dart';
+import 'package:sitravel_app/profile/profile_edit.dart';
 import 'package:sitravel_app/widgets/big_text.dart';
 import 'package:sitravel_app/widgets/icon_text_widget.dart';
 import 'package:sitravel_app/widgets/small_text.dart';
-
-import '../pages/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -18,14 +16,10 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-  final auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      
       backgroundColor: AppColors.lightColor,
       appBar: AppBar(
           elevation: 0,
@@ -119,7 +113,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       onTap: () {
-                        print("TAPPED!!!");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => ProfileEdit())));
                       },
                     ),
                   ),
@@ -206,11 +203,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       onTap: () {
-                        auth.signOut().then((value) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                        // }).onError((error, stackTrace) {
-                        //   Utils().toastMessage(message)
-                        });
+                        print("TAPPED!!!");
                       },
                     ),
                   ),

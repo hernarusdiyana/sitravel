@@ -7,7 +7,7 @@ import 'package:sitravel_app/widgets/big_text.dart';
 import 'package:sitravel_app/widgets/icon_text_widget.dart';
 import 'package:sitravel_app/widgets/small_text.dart';
 
-import '../widgets/menu_card.dart';
+import '../../../widgets/menu_card.dart';
 
 class ChooseLocation extends StatefulWidget {
   const ChooseLocation({super.key});
