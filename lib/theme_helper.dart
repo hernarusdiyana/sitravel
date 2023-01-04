@@ -7,8 +7,9 @@ class ThemeHelper {
       [String lableText = "", String hintText = ""]) {
     return InputDecoration(
       labelText: lableText,
+      
       hintText: hintText,
-      fillColor: Colors.white,
+      fillColor: AppColors.greyColor,
       filled: true,
       contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 15),
       focusedBorder: OutlineInputBorder(

@@ -1,7 +1,10 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sitravel_app/colors.dart';
+import 'package:sitravel_app/theme_helper.dart';
 import 'package:sitravel_app/widgets/big_text.dart';
 import 'package:sitravel_app/widgets/label_text.dart';
 
@@ -15,6 +18,14 @@ class CustomerData extends StatefulWidget {
 }
 
 class _CustomerDataState extends State<CustomerData> {
+  TextEditingController emailController = TextEditingController(text: "");
+
+  final _auth = FirebaseAuth.instance;
+  String? email;
+  String? password;
+  String _errorMessage = '';
+  double _headerHeight = 250;
+  Key _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,83 +55,119 @@ class _CustomerDataState extends State<CustomerData> {
           ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.black12),
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                LabelText(
-                  text: "Pemesan",
-                  color: Colors.black,
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Nama',
-                ),
+      backgroundColor: AppColors.lightColor,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+          padding: EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black12),
+            borderRadius: BorderRadius.circular(16.0),
+            color: AppColors.lightColor,
+          ),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  LabelText(
+                    text: "Pemesan",
+                    color: AppColors.textColor2,
+                  ),
+                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Email',
+              SizedBox(height: 20),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      child: TextField(
+                        decoration: ThemeHelper()
+                            .textInputDecoration('Nama', 'Masukkan Nama Anda'),
+                      ),
+                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                    ),
+                    SizedBox(height: 16.0),
+                    Container(
+                      child: TextField(
+                        decoration: ThemeHelper()
+                            .textInputDecoration('Email', 'example@gmail.com'),
+                        onChanged: (value) {
+                          validateEmail(value);
+                        },
+                      ),
+                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            _errorMessage,
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16.0),
+                    Container(
+                      child: TextField(
+                        decoration: ThemeHelper()
+                            .textInputDecoration('No. HP', 'No. Handphone'),
+                      ),
+                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                    ),
+                    SizedBox(height: 16.0),
+                    Container(
+                      child: TextField(
+                        decoration: ThemeHelper()
+                            .textInputDecoration('NIK', 'Masukkan NIK Anda'),
+                      ),
+                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                    ),
+                    SizedBox(height: 16.0),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        LabelText(
+                          text: "Deskripsi (Optional)",
+                          color: AppColors.textColor2,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Container(
+                      child: TextField(
+                        decoration: ThemeHelper().textInputDecoration(
+                            'Deskripsi', 'Isi bila pemesanan lebih dari 1'),
+                      ),
+                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'No. Handphone',
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'NIK',
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                LabelText(
-                  text: "Deskripsi (Optional)",
-                  color: Colors.black,
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Isi bila pemesanan lebih dari 1',
-                ),
-              ),
-            ),
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void validateEmail(String val) {
+    if (val.isEmpty) {
+      setState(() {
+        _errorMessage = "Email tidak boleh kosong";
+      });
+    } else if (!EmailValidator.validate(val, true)) {
+      setState(() {
+        _errorMessage = "Invalid Email Address";
+      });
+    } else {
+      setState(() {
+        _errorMessage = "";
+      });
+    }
   }
 }

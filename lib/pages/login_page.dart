@@ -7,7 +7,6 @@ import 'package:sitravel_app/home/main_travel_page.dart';
 import 'package:sitravel_app/pages/register_screen.dart';
 import '../components/rounded_button.dart';
 import '../theme_helper.dart';
-import '../theme_helper.dart';
 import 'package:sitravel_app/colors.dart';
 
 // import 'forgot_password_page.dart';
@@ -54,135 +53,138 @@ class _LoginPageState extends State<LoginPage> {
             // ),
             SafeArea(
               child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  margin: EdgeInsets.fromLTRB(
-                      20, 10, 20, 10), // This will be the login form
-                  child: Column(
-                    children: [
-                      Text(
-                        'Holla!',
-                        style: TextStyle(
-                            fontSize: 60, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Login dengan akun Anda',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      SizedBox(height: 30.0),
-                      Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              Container(
-                                child: TextField(
-                                  controller: emailController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  decoration: ThemeHelper().textInputDecoration(
-                                      'Email', 'Enter your Email'),
-                                  onChanged: (val) {
-                                    validateEmail(val);
-                                  },
-                                ),
-                                decoration:
-                                    ThemeHelper().inputBoxDecorationShaddow(),
-                              ),
-                              SizedBox(height: 20.0),
-                              Container(
-                                child: TextField(
-                                  controller: passwordController,
-                                  obscureText: true,
-                                  decoration: ThemeHelper().textInputDecoration(
-                                      'Password', 'Enter your password'),
-                                  onChanged: (value) {
-                                    password = value;
-                                  },
-                                ),
-                                decoration:
-                                    ThemeHelper().inputBoxDecorationShaddow(),
-                              ),
-                              SizedBox(height: 15.0),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    // Navigator.push( context, MaterialPageRoute( builder: (context) => ForgotPasswordPage()), );
-                                  },
-                                  child: Text(
-                                    "Lupa password?",
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
+                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                margin: EdgeInsets.fromLTRB(
+                    20, 10, 20, 10), // This will be the login form
+                child: Column(
+                  children: [
+                    Text(
+                      'Holla!',
+                      style:
+                          TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Login dengan akun Anda',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 30.0),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Container(
+                            child: TextField(
+                              controller: emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: ThemeHelper().textInputDecoration(
+                                  'Email', 'Enter your Email'),
+                              onChanged: (val) {
+                                validateEmail(val);
+                              },
+                            ),
+                            decoration:
+                                ThemeHelper().inputBoxDecorationShaddow(),
+                          ),
+                          SizedBox(height: 20.0),
+                          Container(
+                            child: TextField(
+                              controller: passwordController,
+                              obscureText: true,
+                              decoration: ThemeHelper().textInputDecoration(
+                                  'Password', 'Enter your password'),
+                              onChanged: (value) {
+                                password = value;
+                              },
+                            ),
+                            decoration:
+                                ThemeHelper().inputBoxDecorationShaddow(),
+                          ),
+                          SizedBox(height: 15.0),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                            alignment: Alignment.topRight,
+                            child: GestureDetector(
+                              onTap: () {
+                                // Navigator.push( context, MaterialPageRoute( builder: (context) => ForgotPasswordPage()), );
+                              },
+                              child: Text(
+                                "Lupa password?",
+                                style: TextStyle(
+                                  color: Colors.grey,
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              _errorMessage,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                          Container(
+                            width: size.width * 1,
+                            decoration:
+                                ThemeHelper().buttonBoxDecoration(context),
+                            child: ElevatedButton(
+                              style: ThemeHelper().buttonStyle(),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 100),
                                 child: Text(
-                                  _errorMessage,
-                                  style: TextStyle(color: Colors.red),
+                                  "Login",
+                                  // 'Sign In'.toUpperCase(),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white),
                                 ),
                               ),
-                              Container(
-                                width: size.width * 1,
-                                decoration:
-                                    ThemeHelper().buttonBoxDecoration(context),
-                                child: ElevatedButton(
-                                  style: ThemeHelper().buttonStyle(),
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 100),
-                                    child: Text(
-                                      "Login",
-                                      // 'Sign In'.toUpperCase(),
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                            email: emailController.text,
-                                            password: passwordController.text)
-                                        //After successful login we will redirect to profile page. Let's create profile page now
-                                        .then((value) {
-                                      Navigator.pushReplacement(
+                              onPressed: () {
+                                FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                        email: emailController.text,
+                                        password: passwordController.text)
+                                    //After successful login we will redirect to profile page. Let's create profile page now
+                                    .then((value) {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              MainTravelPage()));
+                                }).onError((error, stackTrace) {
+                                  print("Error ${error.toString()}");
+                                });
+                              },
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            child: Text.rich(
+                              TextSpan(children: [
+                                TextSpan(text: "Belum punya akun? "),
+                                TextSpan(
+                                  text: 'Daftar Sekarang',
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  MainTravelPage()));
-                                    }).onError((error, stackTrace) {
-                                      print("Error ${error.toString()}");
-                                    });
-                                  },
+                                                  RegisterPage()));
+                                    },
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context).accentColor),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
-                                child: Text.rich(TextSpan(children: [
-                                  TextSpan(text: "Belum punya akun? "),
-                                  TextSpan(
-                                    text: 'Daftar Sekarang',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RegisterPage()));
-                                      },
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).accentColor),
-                                  ),
-                                ])),
-                              ),
-                            ],
-                          )),
-                    ],
-                  )),
+                              ]),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
