@@ -82,7 +82,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
                         // padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage("assets/images/jakarta.png"),
+                              image: AssetImage("assets/images/jakarta.jpg"),
                               fit: BoxFit.cover),
                           borderRadius: BorderRadius.circular(14),
                           boxShadow: [
@@ -111,18 +111,12 @@ class _ChooseLocationState extends State<ChooseLocation> {
                                         fontWeight: FontWeight.w500,
                                         fontSize: 18,
                                       ),
-                                      // style: Theme.of(context).textTheme.titleLarge,
-                                      // selectionColor: kTextColor,
                                     )
                                   ],
                                 ),
                               ),
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            new MainEventPage()));
+                                Navigator.pushNamed(context, '/event');
                               }),
                         ),
                       ),
@@ -165,11 +159,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
                                 ),
                               ),
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            new ChooseLocation()));
+                                Navigator.pushNamed(context, '/event');
                               }),
                         ),
                       ),

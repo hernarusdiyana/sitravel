@@ -145,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       onTap: () {
-                        print("TAPPED!!!");
+                        Navigator.pushNamed(context, "/addEvent");
                       },
                     ),
                   ),

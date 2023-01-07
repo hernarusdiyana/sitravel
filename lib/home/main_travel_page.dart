@@ -73,189 +73,180 @@ class _MainTravelPageState extends State<MainTravelPage> {
             ],
           ),
           // bottomNavigationBar: BottomNavBar(),
-          backgroundColor: AppColors.lightColor,
-          body: Stack(
-            children: <Widget>[
-              Container(
-                height: size.height * .35,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(10, 32, 84, 1),
-                  image: DecorationImage(
-                    alignment: Alignment.bottomCenter,
-                    image: AssetImage("assets/images/banner1.jpg"),
-                  ),
-                ),
-              ),
-              SafeArea(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 100,
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              hintText: "Mau ngapain hari ini?",
-                              icon: SvgPicture.asset("assets/icons/user.svg"),
-                              border: InputBorder.none),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Expanded(
-                        child: GridView.count(
-                          crossAxisCount: 2,
-                          childAspectRatio: .90,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                          children: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(14.0),
-                              child: Container(
-                                // padding: EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  color: Color.fromRGBO(10, 32, 84, 1),
-                                  borderRadius: BorderRadius.circular(14),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 15),
-                                      blurRadius: 17,
-                                      spreadRadius: -24,
-                                      color: Colors.black,
-                                    ),
-                                  ],
-                                ),
-                                child: Container(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Spacer(),
-                                            Image.asset(
-                                              "assets/icons/hotel.png",
-                                              height: 70,
-                                            ),
-                                            Spacer(),
-                                            Text(
-                                              "Hotel",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 18,
-                                              ),
-                                              // style: Theme.of(context).textTheme.titleLarge,
-                                              // selectionColor: kTextColor,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        print("Tapped!!!");
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             new MainBookPage()));
-                                      }),
-                                ),
-                              ),
-                            ),
-                            // MenuCard(
-                            //   title: "Hotel",
-                            //   svgSrc: "assets/icons/hotel.png",
-                            //   press: () {
-                            //     print("Tapped!!!");
-                            //     // Navigator.of(context).pushReplacement(
-                            //     //     MaterialPageRoute(
-                            //     //         builder: (context) =>
-                            //     //             new MainBookPage()));
-                            //   },
-                            // ),
-                            MenuCard(
-                              title: "Wisata",
-                              svgSrc: "assets/icons/wisata.png",
-                              press: () {},
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(14.0),
-                              child: Container(
-                                // padding: EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  color: Color.fromRGBO(10, 32, 84, 1),
-                                  borderRadius: BorderRadius.circular(14),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 15),
-                                      blurRadius: 17,
-                                      spreadRadius: -24,
-                                      color: Colors.black,
-                                    ),
-                                  ],
-                                ),
-                                child: Container(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Spacer(),
-                                            Image.asset(
-                                              "assets/icons/event.png",
-                                              height: 70,
-                                            ),
-                                            Spacer(),
-                                            Text(
-                                              "Event",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 18,
-                                              ),
-                                              // style: Theme.of(context).textTheme.titleLarge,
-                                              // selectionColor: kTextColor,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MainEventPage()));
-                                      }),
-                                ),
-                              ),
-                            ),
 
-                            MenuCard(
-                              title: "Kuliner",
-                              svgSrc: "assets/icons/kuliner.png",
-                              press: () {},
-                            ),
-                          ],
+          // backgroundColor: AppColors.lightColor,
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/travel1.jpg"),
+                  fit: BoxFit.cover),
+            ),
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  height: size.height * .35,
+                ),
+                SafeArea(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 100,
                         ),
-                      ),
-                    ],
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: TextField(
+                            decoration: InputDecoration(
+                                hintText: "Mau ngapain hari ini?",
+                                icon: SvgPicture.asset("assets/icons/user.svg"),
+                                border: InputBorder.none),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Expanded(
+                          child: GridView.count(
+                            crossAxisCount: 2,
+                            childAspectRatio: .90,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(14.0),
+                                child: Container(
+                                  // padding: EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(10, 32, 84, 1),
+                                    borderRadius: BorderRadius.circular(14),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        offset: Offset(0, 15),
+                                        blurRadius: 17,
+                                        spreadRadius: -24,
+                                        color: Colors.black,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Spacer(),
+                                              Image.asset(
+                                                "assets/icons/hotel.png",
+                                                height: 70,
+                                              ),
+                                              Spacer(),
+                                              Text(
+                                                "Hotel",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18,
+                                                ),
+                                                // style: Theme.of(context).textTheme.titleLarge,
+                                                // selectionColor: kTextColor,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          print("Tapped!!!");
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             new MainBookPage()));
+                                        }),
+                                  ),
+                                ),
+                              ),
+                              MenuCard(
+                                title: "Wisata",
+                                svgSrc: "assets/icons/wisata.png",
+                                press: () {},
+                              ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(14.0),
+                                child: Container(
+                                  // padding: EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(10, 32, 84, 1),
+                                    borderRadius: BorderRadius.circular(14),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        offset: Offset(0, 15),
+                                        blurRadius: 17,
+                                        spreadRadius: -24,
+                                        color: Colors.black,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Spacer(),
+                                              Image.asset(
+                                                "assets/icons/event.png",
+                                                height: 70,
+                                              ),
+                                              Spacer(),
+                                              Text(
+                                                "Event",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18,
+                                                ),
+                                                // style: Theme.of(context).textTheme.titleLarge,
+                                                // selectionColor: kTextColor,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, '/chooseLocation');
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             MainEventPage()));
+                                        }),
+                                  ),
+                                ),
+                              ),
+                              MenuCard(
+                                title: "Kuliner",
+                                svgSrc: "assets/icons/kuliner.png",
+                                press: () {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }

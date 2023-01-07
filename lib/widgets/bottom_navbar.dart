@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:sitravel_app/booked/main_booked_page.dart';
 import 'package:sitravel_app/colors.dart';
 // import 'package:sitravel_app/book/main_book_page.dart';
 import 'package:sitravel_app/pages/main_saved_page.dart';
@@ -46,10 +47,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               index: 1,
               icon: Icons.favorite_border,
               press: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const MainSavedPage()),
-                );
+                Navigator.pushNamed(context, '/booked');
               }),
           bottomItem(
             title: "Bookingan",
@@ -128,7 +126,7 @@ Widget getSelectedWidget({required int index}) {
       widget = const MainSavedPage();
       break;
     default:
-      widget = const MainSavedPage();
+      widget = const MainBookedPage();
       break;
   }
   return widget;
