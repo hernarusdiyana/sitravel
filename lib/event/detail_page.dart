@@ -46,8 +46,12 @@ class _DetailPageState extends State<DetailPage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: ((context) => OrderingPage())));
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.mainColor,
+                fixedSize: const Size(240, 80),
+              ),
               child: Text("Pesan"),
-            )),
+            ),),
       ),
       backgroundColor: AppColors.lightColor,
       body: SingleChildScrollView(

@@ -61,7 +61,10 @@ class _MainTravelPageState extends State<MainTravelPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()),
+                      MaterialPageRoute(
+                          builder: (context) => ProfilePage(
+                                id: '',
+                              )),
                     );
                   },
                   child: SvgPicture.asset(

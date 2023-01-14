@@ -1,16 +1,38 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sitravel_app/application_state.dart';
 import 'package:sitravel_app/colors.dart';
+import 'package:sitravel_app/event/main_event.dart';
+import 'package:sitravel_app/pages/login_page.dart';
 import 'package:sitravel_app/widgets/big_text.dart';
 import 'package:sitravel_app/widgets/icon_text_widget.dart';
 import 'package:sitravel_app/widgets/small_text.dart';
-import 'detail_page.dart';
+import 'package:firebase_auth/firebase_auth.dart' // new
+    hide
+        EmailAuthProvider,
+        PhoneAuthProvider;
+import 'package:provider/provider.dart';
 import '../widgets/menu_card.dart';
-import 'events.dart';
+import 'detail_page.dart';
 
 class TravelPageBody extends StatefulWidget {
-  const TravelPageBody({super.key});
+  final String documentId;
+
+  const TravelPageBody({
+    super.key,
+    required this.documentId,
+    required this.addEvents,
+    required this.events,
+  });
+  final FutureOr<void> Function(String event) addEvents;
+  final List<GetDataEvent> events;
 
   @override
   State<TravelPageBody> createState() => _TravelPageBodyState();
@@ -18,6 +40,12 @@ class TravelPageBody extends StatefulWidget {
 
 class _TravelPageBodyState extends State<TravelPageBody> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String username = "";
+  String email = "";
+
+  final _formKey = GlobalKey<FormState>(debugLabel: '_GetDataEvent');
+  final _controller = TextEditingController();
+  String? name, location;
 
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue = 0.0;
@@ -33,9 +61,67 @@ class _TravelPageBodyState extends State<TravelPageBody> {
     });
   }
 
+  getPref() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var islogin = pref.getBool("is_login");
+    if (islogin != null && islogin == true) {
+      setState(() {
+        email = pref.getString("email")!;
+      });
+    } else {
+      Navigator.of(context, rootNavigator: true).pop();
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => const LoginPage(),
+        ),
+        (route) => false,
+      );
+    }
+  }
+
   @override
   void dispose() {
     pageController.dispose();
+  }
+
+  bool _loggedIn = false;
+  bool get loggedIn => _loggedIn;
+
+  StreamSubscription<QuerySnapshot>? _getDataEvent;
+  List<GetDataEvent> _getDataEvents = [];
+  List<GetDataEvent> get getDataEvents => _getDataEvents;
+
+  Future _getData() async {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+
+    FirebaseUIAuth.configureProviders([
+      EmailAuthProvider(),
+    ]);
+    final currUser = await FirebaseAuth.instance.currentUser;
+    FirebaseAuth.instance.userChanges().listen((user) async {
+      if (user != null) {
+        _loggedIn = true;
+        DocumentSnapshot snapshot = await FirebaseFirestore.instance
+            .collection('events')
+            .doc('XaydjjYE9rKuqsZVyfwq')
+            .get();
+
+        Map<String, dynamic> toJson() => {
+              //agar data dapat di baca dari bentuk Array ke bentuk JSON, karena flutter
+              'name': name, //hanya dapat membaca data dalam bentuk JSON
+              'location': location,
+            };
+
+        setState(() {});
+      } else {
+        _loggedIn = false;
+        _getDataEvents = [];
+        _getDataEvent?.cancel();
+      }
+      // notifyListeners();
+    });
   }
 
   // final String documentId;
@@ -43,32 +129,8 @@ class _TravelPageBodyState extends State<TravelPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    // CollectionReference events = FirebaseFirestore.instance
-    //     .collection('events')
-    //     .withConverter<Events>(
-    //         fromFirestore: (snapshots, _) => Events.fromJson(snapshots.data()),
-    //         toFirestore: (events, _) => events.toJson());
-
-    // return StreamBuilder<QuerySnapshot<Events>>(
-    //   stream: events.snapshots(),
-    //   builder: (contextStream, snapshotStream) {
-    //      if (snapshotStream.connectionState == ConnectionState.active) {
-    //         return ListView(
-    //           children: List<Widget>.generate(
-    //               snapshotStream.data.size,
-    //               (index) => ItemBinatang(
-    //                   events: snapshotStream.data?.docs[index].data())),
-    //         );
-    //       }
-
-    //       if (snapshotStream.connectionState == ConnectionState.waiting) {
-    //         return Center(
-    //           child: CircularProgressIndicator(),
-    //         );
-    //       }
-    //   },
-
-    // );
+    CollectionReference events =
+        FirebaseFirestore.instance.collection('events');
 
     var size = MediaQuery.of(context).size;
     return Column(
@@ -110,6 +172,7 @@ class _TravelPageBodyState extends State<TravelPageBody> {
         ),
 
         //List of Travel and Images
+
         Container(
           height: 1200,
           decoration: BoxDecoration(
@@ -128,6 +191,7 @@ class _TravelPageBodyState extends State<TravelPageBody> {
                     onTap: () {
                       Navigator.push(
                         context,
+                        // MaterialPageRoute(builder: (context) => DetailPage(events, _eventId)),
                         MaterialPageRoute(builder: (context) => DetailPage()),
                       );
                     },
@@ -162,13 +226,14 @@ class _TravelPageBodyState extends State<TravelPageBody> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  BigText(
-                                    text: "Bismillah Bali",
-                                    color: Colors.black,
-                                  ),
+                                  for (var event in widget.events)
+                                    BigText(
+                                      text: '${event.name}',
+                                      color: Colors.black,
+                                    ),
                                   SizedBox(height: 14),
                                   SmallText(
-                                    text: "Lorem ipsum sir dolor amet",
+                                    text: "'${location}'",
                                     color: Colors.black54,
                                   ),
                                   SizedBox(height: 14),

@@ -7,15 +7,18 @@ import 'package:sitravel_app/profile/profile_edit.dart';
 import 'package:sitravel_app/widgets/big_text.dart';
 import 'package:sitravel_app/widgets/icon_text_widget.dart';
 import 'package:sitravel_app/widgets/small_text.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key, required String id});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final databaseReference = FirebaseDatabase.instance.reference();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -31,6 +34,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           actions: []),
       body: Stack(
+        //       databaseReference.once().then((DataSnapshot snapshot) {
+        // // Mengambil data dari snapshot
+        //       }),
         children: <Widget>[
           Container(
             height: size.height * .25,
