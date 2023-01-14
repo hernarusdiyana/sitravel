@@ -39,19 +39,23 @@ class _DetailPageState extends State<DetailPage> {
       ),
       bottomNavigationBar: GestureDetector(
         child: Container(
-            color: Colors.transparent,
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => OrderingPage())));
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.mainColor,
-                fixedSize: const Size(240, 80),
-              ),
-              child: Text("Pesan"),
-            ),),
+          color: Colors.transparent,
+          padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => OrderingPage())));
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.mainColor,
+              fixedSize: const Size(240, 40),
+            ),
+            child: Text(
+              "Pesan",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
       ),
       backgroundColor: AppColors.lightColor,
       body: SingleChildScrollView(

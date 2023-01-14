@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -41,17 +42,20 @@ class _CustomerDataState extends State<CustomerData> {
       bottomNavigationBar: GestureDetector(
         child: Container(
           color: Colors.transparent,
-          padding: EdgeInsets.only(
-            left: 20,
-            right: 20,
-            bottom: 10,
-          ),
+          padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: ((context) => OrderDetail())));
             },
-            child: Text("Book Now"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.mainColor,
+              fixedSize: const Size(240, 40),
+            ),
+            child: Text(
+              "Pesan Sekarang",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),

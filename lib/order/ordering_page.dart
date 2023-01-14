@@ -35,17 +35,20 @@ class _OrderingPageState extends State<OrderingPage> {
       bottomNavigationBar: GestureDetector(
         child: Container(
           color: Colors.transparent,
-          padding: EdgeInsets.only(
-            left: 20,
-            right: 20,
-            bottom: 10,
-          ),
+          padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: ((context) => CustomerData())));
             },
-            child: Text("Isi Data Pemesan >"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.mainColor,
+              fixedSize: const Size(240, 40),
+            ),
+            child: Text(
+              "Isi Data Pemesan >",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
